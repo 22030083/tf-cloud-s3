@@ -13,7 +13,12 @@ provider "aws" {
 
 # Simple S3 Bucket
 resource "aws_s3_bucket" "my_bucket" {
-  bucket = "tf-clooudd-s3-bucket-12345" # must be globally unique
+  bucket = "tf-cloud-s3-bucket-12345" # must be globally unique
+}
+
+# Set bucket ACL separately (private)
+resource "aws_s3_bucket_acl" "bucket_acl" {
+  bucket = aws_s3_bucket.my_bucket.id
   acl    = "private"
 }
 
