@@ -14,12 +14,7 @@ provider "aws" {
 # Simple S3 Bucket
 resource "aws_s3_bucket" "my_bucket" {
   bucket = "tf-clouud-s3-bucket-12345" # must be globally unique
-}
-
-# Set bucket ACL separately (private)
-resource "aws_s3_bucket_acl" "bucket_acl" {
-  bucket = aws_s3_bucket.my_bucket.id
-  acl    = "private"
+  force_destroy = true # optional: allows terraform destroy to delete non-empty bucket
 }
 
 # Output the bucket name
